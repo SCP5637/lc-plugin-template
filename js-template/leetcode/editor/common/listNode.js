@@ -1,4 +1,5 @@
 export class ListNode {
+    //leetcode的链表节点
     constructor(val, next) {
         this.val = (val === undefined ? 0 : val);
         this.next = (next === undefined ? null : next);

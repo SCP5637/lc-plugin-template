@@ -8,6 +8,7 @@
 
 import {ListNode} from "../common/listNode.js";
 import {TreeNode} from "../common/treeNode.js";
+import {PriorityQueue} from "../common/priorityQueue.js";
 
 // @lc code=start
 /**
@@ -22,7 +23,28 @@ import {TreeNode} from "../common/treeNode.js";
  * @return {ListNode}
  */
 var mergeKLists = function(lists) {
-    
+    if (lists.length === 0) return null;
+    if (lists.length > 0) {
+        let minPQ = new PriorityQueue((a, b) => a.val - b.val);
+        for (let i = 0; i < lists.length; i++){
+            if (lists[i] !== null) {
+                minPQ.push(lists[i]);
+            }
+        }
+
+        let dummy = new ListNode(-1);
+        let p = dummy;
+        while(!minPQ.isEmpty()) {
+            let cur = minPQ.pop();
+            p.next = cur;
+            if (cur.next !== null) {
+                minPQ.push(cur.next);
+            }
+            p = p.next;
+        }
+        return dummy.next;
+    }
+    return null;
 };
 // @lc code=end
 
