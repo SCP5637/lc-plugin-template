@@ -15,18 +15,29 @@ import {TreeNode} from "../common/treeNode.js";
  * @return {number}
  */
 var removeDuplicates = function(nums) {
-    if (nums.length === 0 || nums.length === 1) {
-        return nums.length;
-    }
-    if (nums.length === new Set(nums).size) return nums.length;
-    // 原地删除
-    let i = nums.length;
-    while (i--) {
-        if (nums[i] === nums[i - 1]) {
-            nums.splice(i, 1);
+    // 并非原地删除
+    // if (nums.length === 0 || nums.length === 1) {
+    //     return nums.length;
+    // }
+    // if (nums.length === new Set(nums).size) return nums.length;
+    // let i = nums.length;
+    // while (i--) {
+    //     if (nums[i] === nums[i - 1]) {
+    //         nums.splice(i, 1);
+    //     }
+    // }
+    // return nums.length;
+
+    if (nums.length <= 1) return nums.length;
+    // 快慢指针原地删除
+    let slow = 0;
+    for (let fast = 1; fast < nums.length; fast++) {
+        if (nums[fast] !== nums[slow]) {
+            slow++;
+            nums[slow] = nums[fast];
         }
     }
-    return nums.length;
+    return slow + 1;
 };
 // @lc code=end
 
