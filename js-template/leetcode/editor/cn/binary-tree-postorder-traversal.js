@@ -1,8 +1,8 @@
 /*
- * @lc app=leetcode.cn id=144 lang=javascript
+ * @lc app=leetcode.cn id=145 lang=javascript
  * @lcpr version=30401
  *
- * [144] 二叉树的前序遍历
+ * [145] 二叉树的后序遍历
  */
 
 
@@ -22,19 +22,19 @@ import {TreeNode} from "../common/treeNode.js";
  * @param {TreeNode} root
  * @return {number[]}
  */
-// var preorderTraversal = function(root) {
-//     // 拆解问题: 前序遍历 = 根节点 + 左子树 + 右子树
-//     return root ? [root.val, ...preorderTraversal(root.left), ...preorderTraversal(root.right)] : [];
+// var postorderTraversal = function(root) {
+//     // 拆解问题: 后序遍历 = 左子树 + 右子树 + 根节点
+//     return root ? [...postorderTraversal(root.left), ...postorderTraversal(root.right), root.val] : [];
 // };
-var preorderTraversal = function (root) {
+var postorderTraversal = function (root) {
     const res = [];
     // 优化写法，先前写的虽然极简，但是会反复对最初的数组进行 concat ，并且不难发现会导致出现很多的数组重复复制
     // 所以这种递归遍历最好是创建一个额外对象，把结果push到对象里，而不是直接在结果本身上递归
     function dfs(node) {
         if (!node) return;
-        res.push(node.val);
         dfs(node.left);
         dfs(node.right);
+        res.push(node.val);
     }
     dfs(root);
     return res;
