@@ -25,6 +25,11 @@ var gcd = function(a, b) {
     if (b === 0) return a;
     return gcd(b, a % b);
 }
+
+// 最大公倍数也可以基于gcd得到，因为a * b = gcd(a, b) * lcm(a, b)
+// var lcm = function(a, b) {
+//     return a * b / gcd(a, b);
+// }
 // @lc code=end
 
 // your test code here
