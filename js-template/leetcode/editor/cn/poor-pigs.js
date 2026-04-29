@@ -25,7 +25,9 @@ var poorPigs = function(buckets, minutesToDie, minutesToTest) {
     const rounds = Math.floor(minutesToTest / minutesToDie);
     const states = rounds + 1;
     if (states === 1) return buckets === 1 ? 0 : Infinity;
-    return Math.ceil(Math.log(buckets) / Math.log(states));
+    
+    // 减去一个极小的数来避免浮点数精度导致的向上取整错误
+    return Math.ceil(Math.log(buckets) / Math.log(states) - 1e-10);
 };
 // @lc code=end
 
